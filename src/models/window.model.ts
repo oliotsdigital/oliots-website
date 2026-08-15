@@ -1,9 +1,11 @@
 export type WindowId = 
   | 'services-app' 
-  | 'about-app' 
+  | 'products-app'
+  | 'portfolio-app'
   | 'blog-app' 
   | 'contact-app' 
   | 'appointment-app' 
+  | 'about-app'
   | 'ai-terminal';
 
 export interface WindowState {

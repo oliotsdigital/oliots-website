@@ -3,6 +3,8 @@ import { WindowId, WindowState } from '@/models/window.model';
 
 const INITIAL_WINDOWS: Record<WindowId, WindowState> = {
   'services-app': { id: 'services-app', title: 'Services — Oliots Digital Capabilities', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
+  'products-app': { id: 'products-app', title: 'Products — Software & AI Platforms', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
+  'portfolio-app': { id: 'portfolio-app', title: 'Portfolio — Selected Case Studies', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
   'about-app': { id: 'about-app', title: 'About Us — System Overview', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
   'blog-app': { id: 'blog-app', title: 'File Explorer — Knowledge Base', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
   'contact-app': { id: 'contact-app', title: 'Contact Terminal — Message Dispatch', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },

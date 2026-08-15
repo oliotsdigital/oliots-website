@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ArrowRight, Volume2, VolumeX, Mail, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Mail, CheckCircle2 } from 'lucide-react';
 import { useSoundState } from '@/state/useSoundState';
 import { useDesktopState } from '@/state/useDesktopState';
 import { useAppointmentState } from '@/state/useAppointmentState';
@@ -11,6 +11,8 @@ import { DesktopBackgroundCanvas } from './DesktopBackgroundCanvas';
 import { FoldersContainer } from '@/components/folders/FoldersContainer';
 
 import { ServicesApp } from '@/components/apps/ServicesApp/ServicesApp';
+import { ProductsApp } from '@/components/apps/ProductsApp/ProductsApp';
+import { PortfolioApp } from '@/components/apps/PortfolioApp/PortfolioApp';
 import { AboutApp } from '@/components/apps/AboutApp/AboutApp';
 import { BlogApp } from '@/components/apps/BlogApp/BlogApp';
 import { ContactApp } from '@/components/apps/ContactApp/ContactApp';
@@ -65,45 +67,21 @@ export function DesktopContainer() {
       {/* Dynamic Animated Gradient Wallpaper Canvas */}
       <DesktopBackgroundCanvas />
 
-      {/* Top Navbar Header */}
-      <header className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between relative z-20">
-        {/* Logo Mark */}
-        <div className="flex items-center space-x-3">
-          <img 
-            src="/logos/Logo-removebg-preview.png" 
-            alt="Oliots Digital Logo" 
-            className="h-10 sm:h-12 w-auto object-contain"
-          />
-        </div>
-
-        {/* Top Navbar Actions */}
-        <div className="flex items-center space-x-3">
-          {/* Sound FX Toggle */}
-          <button
-            onClick={toggleAudio}
-            className="p-2.5 rounded-xl bg-white/80 hover:bg-white border border-slate-200 text-slate-600 hover:text-blue-600 transition-all shadow-xs cursor-pointer"
-            title={audioEnabled ? 'Audio Effects On' : 'Audio Effects Muted'}
-            aria-label="Toggle Sound Effects"
-          >
-            {audioEnabled ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
-          </button>
-
-          {/* Contact Button */}
-          <button
-            onClick={() => openWindow('contact-app')}
-            className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer"
-          >
-            Contact Studio
-          </button>
-        </div>
-      </header>
-
       {/* Main Hero Container View */}
-      <main className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 relative z-20">
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-16 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* LEFT SIDE: Hero Title, Description & Email Capture Form */}
+          {/* LEFT SIDE: Logo, Hero Title, Description & Email Capture Form */}
           <section className="lg:col-span-6 flex flex-col justify-center space-y-6">
+
+            {/* Logo Image Above Hero Title */}
+            <div>
+              <img 
+                src="/logos/Logo-removebg-preview.png" 
+                alt="Oliots Digital Logo" 
+                className="h-24 sm:h-30 md:h-30 w-auto object-contain"
+              />
+            </div>
 
             {/* Hero Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12]">
@@ -167,6 +145,22 @@ export function DesktopContainer() {
         onFocus={() => bringToFront('services-app')}
         playBeep={playBeep}
         onSelectServiceForBooking={handleSelectServiceForBooking}
+      />
+
+      <ProductsApp
+        windowState={windows['products-app']}
+        onMinimize={() => minimizeWindow('products-app')}
+        onMaximize={() => toggleMaximize('products-app')}
+        onClose={() => closeWindow('products-app')}
+        onFocus={() => bringToFront('products-app')}
+      />
+
+      <PortfolioApp
+        windowState={windows['portfolio-app']}
+        onMinimize={() => minimizeWindow('portfolio-app')}
+        onMaximize={() => toggleMaximize('portfolio-app')}
+        onClose={() => closeWindow('portfolio-app')}
+        onFocus={() => bringToFront('portfolio-app')}
       />
 
       <AboutApp
