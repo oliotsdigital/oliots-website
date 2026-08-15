@@ -43,7 +43,7 @@ export function WindowShell({
       style={{ zIndex: zIndex + 50 }}
       onMouseDown={onFocus}
       onTouchStart={onFocus}
-      className="fixed inset-0 bg-slate-950/60 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 pointer-events-auto transition-all animate-fadeIn"
+      className="fixed inset-0 bg-slate-950/60 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 pointer-events-auto transition-all animate-fadeIn overflow-y-auto z-[100]"
       onClick={onClose}
     >
       {/* Modal Container */}
@@ -100,7 +100,7 @@ export function WindowShell({
         </header>
 
         {/* Modal Body Main Section */}
-        <main className="flex-1 flex flex-col overflow-hidden relative bg-white">
+        <main className="flex-1 flex flex-col overflow-y-auto relative bg-white">
           {children}
         </main>
       </div>

@@ -89,14 +89,14 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="light h-full">
+    <html lang="en" className="light min-h-full">
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} font-sans h-full w-full overflow-hidden antialiased touch-manipulation`}>
+      <body className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} font-sans min-h-screen w-full overflow-x-hidden antialiased touch-manipulation`}>
         {children}
       </body>
     </html>
