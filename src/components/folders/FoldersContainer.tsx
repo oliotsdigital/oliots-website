@@ -7,8 +7,7 @@ import {
   FolderTree, 
   FolderClock, 
   FolderPlus,
-  Sparkles, 
-  Trash2
+  Sparkles
 } from 'lucide-react';
 import { WindowId } from '@/models/window.model';
 
@@ -66,13 +65,6 @@ const FOLDERS: FolderConfig[] = [
     icon: Sparkles,
     iconBg: 'bg-cyan-50 border-cyan-100 text-cyan-600',
     iconColor: 'group-hover:text-cyan-600'
-  },
-  {
-    id: 'recycle-app',
-    label: 'Recycle Bin',
-    icon: Trash2,
-    iconBg: 'bg-slate-100 border-slate-200 text-slate-600',
-    iconColor: 'group-hover:text-slate-600'
   }
 ];
 

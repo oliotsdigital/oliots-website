@@ -7,8 +7,7 @@ const INITIAL_WINDOWS: Record<WindowId, WindowState> = {
   'blog-app': { id: 'blog-app', title: 'File Explorer — Knowledge Base', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
   'contact-app': { id: 'contact-app', title: 'Contact Terminal — Message Dispatch', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
   'appointment-app': { id: 'appointment-app', title: 'Schedule Strategy Consultation', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
-  'ai-terminal': { id: 'ai-terminal', title: 'Copilot AI — Interactive Assistant', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 },
-  'recycle-app': { id: 'recycle-app', title: 'Recycle Bin', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 }
+  'ai-terminal': { id: 'ai-terminal', title: 'Copilot AI — Interactive Assistant', isOpen: false, isMinimized: false, isMaximized: false, zIndex: 40 }
 };
 
 export function useDesktopState(playBeep: (freq?: number, type?: OscillatorType, duration?: number) => void) {

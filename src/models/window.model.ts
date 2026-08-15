@@ -4,8 +4,7 @@ export type WindowId =
   | 'blog-app' 
   | 'contact-app' 
   | 'appointment-app' 
-  | 'ai-terminal' 
-  | 'recycle-app';
+  | 'ai-terminal';
 
 export interface WindowState {
   id: WindowId;

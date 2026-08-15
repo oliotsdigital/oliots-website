@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import { Sparkles, ArrowRight, Calendar, Volume2, VolumeX, ShieldCheck } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Volume2, VolumeX, Mail, CheckCircle2 } from 'lucide-react';
 import { useSoundState } from '@/state/useSoundState';
 import { useDesktopState } from '@/state/useDesktopState';
 import { useAppointmentState } from '@/state/useAppointmentState';
@@ -16,7 +16,6 @@ import { BlogApp } from '@/components/apps/BlogApp/BlogApp';
 import { ContactApp } from '@/components/apps/ContactApp/ContactApp';
 import { AppointmentApp } from '@/components/apps/AppointmentApp/AppointmentApp';
 import { AiTerminalApp } from '@/components/apps/AiTerminalApp/AiTerminalApp';
-import { RecycleBinApp } from '@/components/apps/RecycleBinApp/RecycleBinApp';
 
 export function DesktopContainer() {
   const { audioEnabled, toggleAudio, playBeep } = useSoundState();
@@ -32,6 +31,24 @@ export function DesktopContainer() {
 
   const appointmentState = useAppointmentState(playBeep);
   const copilotState = useCopilotState(playBeep);
+
+  const [emailInput, setEmailInput] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [isSubmittingEmail, setIsSubmittingEmail] = useState(false);
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!emailInput || !emailInput.includes('@')) return;
+
+    setIsSubmittingEmail(true);
+    playBeep(600, 'sine');
+
+    setTimeout(() => {
+      setIsSubmittingEmail(false);
+      setEmailSubmitted(true);
+      copilotState.appendSystemLogMessage(`✅ Email registered: ${emailInput}`);
+    }, 600);
+  };
 
   const handleSelectServiceForBooking = (svcName: string) => {
     appointmentState.selectServiceAndOpen(svcName);
@@ -61,7 +78,6 @@ export function DesktopContainer() {
 
         {/* Top Navbar Actions */}
         <div className="flex items-center space-x-3">
-
           {/* Sound FX Toggle */}
           <button
             onClick={toggleAudio}
@@ -86,9 +102,8 @@ export function DesktopContainer() {
       <main className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
-          {/* LEFT SIDE: Hero Title, Description & 2 Action Buttons */}
+          {/* LEFT SIDE: Hero Title, Description & Email Capture Form */}
           <section className="lg:col-span-6 flex flex-col justify-center space-y-6">
-
 
             {/* Hero Main Headline */}
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12]">
@@ -100,32 +115,38 @@ export function DesktopContainer() {
 
             {/* Hero Description */}
             <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-xl">
-            Your one stop destination for all Digital Transformation
+              Your one stop destination for all Digital Transformation
             </p>
 
-            {/* 2 Buttons Below Hero Content */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
-              {/* Button 1: Primary Action */}
-              <button
-                id="btn-explore-capabilities"
-                onClick={() => openWindow('services-app')}
-                className="px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-98 text-white font-bold text-sm sm:text-base flex items-center justify-center space-x-2.5 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transition-all duration-200 cursor-pointer group"
-              >
-                <span>Explore Capabilities</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              {/* Button 2: Secondary Action */}
-              <button
-                id="btn-schedule-consultation"
-                onClick={() => openWindow('appointment-app')}
-                className="px-7 py-4 rounded-2xl bg-white/90 hover:bg-white active:scale-98 backdrop-blur-md border border-slate-200 text-slate-800 font-bold text-sm sm:text-base flex items-center justify-center space-x-2.5 shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
-              >
-                <Calendar className="w-5 h-5 text-blue-600" />
-                <span>Schedule Consultation</span>
-              </button>
-            </div>
-
+            {/* Email Capture Input & Button */}
+            {emailSubmitted ? (
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold flex items-center space-x-3 shadow-xs max-w-md">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+                <span>Thank you! We&apos;ve received your email and will be in touch shortly.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row items-stretch gap-3 max-w-md pt-2">
+                <div className="relative flex-1">
+                  <Mail className="w-5 h-5 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+                  <input
+                    type="email"
+                    required
+                    value={emailInput}
+                    onChange={(e) => setEmailInput(e.target.value)}
+                    placeholder="Enter your email address..."
+                    className="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-white border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 text-slate-900 placeholder:text-slate-400 font-medium text-sm sm:text-base outline-none transition-all shadow-2xs"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmittingEmail}
+                  className="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-98 text-white font-bold text-sm sm:text-base flex items-center justify-center space-x-2 shadow-md shadow-blue-500/20 hover:shadow-lg transition-all duration-200 cursor-pointer disabled:opacity-75"
+                >
+                  <span>{isSubmittingEmail ? 'Submitting...' : 'Get Started'}</span>
+                  {!isSubmittingEmail && <ArrowRight className="w-4 h-4" />}
+                </button>
+              </form>
+            )}
 
           </section>
 
@@ -191,14 +212,6 @@ export function DesktopContainer() {
         onClose={() => closeWindow('ai-terminal')}
         onFocus={() => bringToFront('ai-terminal')}
         copilotState={copilotState}
-      />
-
-      <RecycleBinApp
-        windowState={windows['recycle-app']}
-        onMinimize={() => minimizeWindow('recycle-app')}
-        onMaximize={() => toggleMaximize('recycle-app')}
-        onClose={() => closeWindow('recycle-app')}
-        onFocus={() => bringToFront('recycle-app')}
       />
     </div>
   );
