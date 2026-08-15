@@ -10,7 +10,6 @@ import { useCopilotState } from '@/state/useCopilotState';
 import { DesktopBackgroundCanvas } from './DesktopBackgroundCanvas';
 import { FoldersContainer } from '@/components/folders/FoldersContainer';
 
-import { ServicesApp } from '@/components/apps/ServicesApp/ServicesApp';
 import { ProductsApp } from '@/components/apps/ProductsApp/ProductsApp';
 import { PortfolioApp } from '@/components/apps/PortfolioApp/PortfolioApp';
 import { AboutApp } from '@/components/apps/AboutApp/AboutApp';
@@ -137,16 +136,6 @@ export function DesktopContainer() {
       </main>
 
       {/* App Window Modals */}
-      <ServicesApp
-        windowState={windows['services-app']}
-        onMinimize={() => minimizeWindow('services-app')}
-        onMaximize={() => toggleMaximize('services-app')}
-        onClose={() => closeWindow('services-app')}
-        onFocus={() => bringToFront('services-app')}
-        playBeep={playBeep}
-        onSelectServiceForBooking={handleSelectServiceForBooking}
-      />
-
       <ProductsApp
         windowState={windows['products-app']}
         onMinimize={() => minimizeWindow('products-app')}

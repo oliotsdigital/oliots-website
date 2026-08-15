@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ServiceCategory, ServiceItem } from '@/models/service.model';
 
-export function useServicesState(playBeep: (freq?: number, type?: OscillatorType, duration?: number) => void) {
+export function useServicesState(playBeep?: (freq?: number, type?: OscillatorType, duration?: number) => void) {
   const [activeCategory, setActiveCategory] = useState<ServiceCategory>('all');
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,7 +22,7 @@ export function useServicesState(playBeep: (freq?: number, type?: OscillatorType
   }, []);
 
   const filterServices = useCallback((category: ServiceCategory) => {
-    playBeep(650, 'sine');
+    playBeep?.(650, 'sine');
     setActiveCategory(category);
   }, [playBeep]);
 
