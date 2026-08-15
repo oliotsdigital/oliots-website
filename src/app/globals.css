@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  --color-winblue-50: #f0f7ff;
+  --color-winblue-100: #e0effe;
+  --color-winblue-200: #bae0fd;
+  --color-winblue-300: #7cc7fd;
+  --color-winblue-400: #36a9fa;
+  --color-winblue-500: #0c8ce9;
+  --color-winblue-600: #0067C0;
+  --color-winblue-700: #00529e;
+  --color-winblue-800: #054682;
+  --color-winblue-900: #0a3b6d;
+  --color-winfolder: #ffd043;
+  --color-winfolderback: #e5a400;
+  --color-winbg: #f3f3f3;
+  --color-winmica: rgba(255, 255, 255, 0.85);
+  --color-wincard: #ffffff;
+  
+  --shadow-win-window: 0 16px 36px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-win-taskbar: 0 -2px 16px rgba(0, 0, 0, 0.08);
+  --shadow-win-menu: 0 16px 40px rgba(0, 0, 0, 0.18);
+  --shadow-win-context: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.win11-mica {
+  background: rgba(249, 249, 249, 0.88);
+  backdrop-filter: blur(35px) saturate(140%);
+  -webkit-backdrop-filter: blur(35px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.win11-taskbar-glass {
+  background: rgba(243, 243, 243, 0.85);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.win11-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.win11-card:hover {
+  background: #ffffff;
+  border-color: rgba(0, 103, 192, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 103, 192, 0.12);
+  transform: translateY(-2px);
+}
+
+.win11-btn-primary {
+  background: #0067C0;
+  color: #ffffff;
+  transition: all 0.15s ease;
+}
+.win11-btn-primary:hover {
+  background: #00529e;
+  box-shadow: 0 3px 10px rgba(0, 103, 192, 0.3);
+}
+
+.win11-btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #1c1c1c;
+  transition: all 0.15s ease;
+}
+.win11-btn-secondary:hover {
+  background: rgba(240, 240, 240, 0.95);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+.os-window {
+  border-radius: 10px;
+  overflow: hidden;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.os-window.hidden-window {
+  opacity: 0;
+  transform: scale(0.94) translateY(18px);
+  pointer-events: none;
+}
+
+.os-window.maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 48px) !important;
+  border-radius: 0 !important;
+  transform: none !important;
+}
+
+.win-control-btn {
+  width: 46px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+  font-size: 11px;
+  color: #444;
+}
+.win-control-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+  color: #000;
+}
+.win-control-close:hover {
+  background: #c42b1c !important;
+  color: #ffffff !important;
+}
+
+.desktop-shortcut {
+  width: 86px;
+  padding: 6px 4px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.12s ease;
+  cursor: pointer;
+}
+.desktop-shortcut:hover {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.desktop-shortcut:active, .desktop-shortcut.selected-icon {
+  background: rgba(0, 103, 192, 0.15);
+  border-color: rgba(0, 103, 192, 0.4);
+}
+
+.win11-folder-icon {
+  position: relative;
+  width: 48px;
+  height: 40px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.15));
+}
+
+#contextMenu {
+  transition: opacity 0.1s ease, transform 0.1s ease;
+}
+#contextMenu.hidden-context {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+#startMenu {
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#startMenu.hidden-start {
+  opacity: 0;
+  transform: translate(-50%, 20px) scale(0.96);
+  pointer-events: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
