@@ -65,18 +65,14 @@ export function DesktopHeroWallpaperWidget({
 
   return (
     <section className="w-full max-w-3xl py-2 sm:py-6 px-1 sm:px-4 bg-transparent select-text transition-all duration-300">
-      {/* Top Tag Ribbon */}
-      <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/70 backdrop-blur-md border border-white/90 text-winblue-700 text-[11px] sm:text-xs font-semibold shadow-xs mb-4 sm:mb-6 select-text">
-        <Sparkles className="w-3.5 h-3.5 text-winblue-600 animate-pulse" />
-        <span className="tracking-wide">OLIOTS DIGITAL OS • v3.5.0 ENTERPRISE</span>
-      </div>
+
 
       {/* Main SEO Headline */}
       <header className="mb-4 sm:mb-6 select-text">
         <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 leading-[1.18] mb-3">
-          We Build Digital Experiences That{' '}
+          Transform Digitally{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-winblue-600 via-blue-500 to-sky-500">
-            Move Businesses Forward.
+            Grow Exponentially
           </span>
         </h1>
         <p className="text-slate-700 text-xs sm:text-base leading-relaxed max-w-xl font-medium drop-shadow-2xs">

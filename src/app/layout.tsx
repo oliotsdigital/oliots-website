@@ -89,7 +89,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="light h-full select-none">
+    <html lang="en" className="light h-full">
       <head>
         <script
           type="application/ld+json"

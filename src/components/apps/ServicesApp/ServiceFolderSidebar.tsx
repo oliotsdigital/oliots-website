@@ -28,7 +28,7 @@ export function ServiceFolderSidebar({
   ];
 
   return (
-    <aside className="w-full md:w-72 bg-slate-50/90 border-r border-slate-200/90 flex flex-col flex-shrink-0 p-3.5 overflow-y-auto select-none">
+    <aside className="w-full md:w-72 bg-slate-50/90 border-r border-slate-200/90 flex flex-col flex-shrink-0 p-3.5 overflow-y-auto">
       {/* Sidebar Title Header */}
       <div className="flex items-center space-x-2 px-1 mb-3 text-xs font-black text-slate-700 uppercase tracking-wider">
         <Layers className="w-4 h-4 text-winblue-600" />

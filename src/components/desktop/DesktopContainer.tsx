@@ -1,18 +1,14 @@
 'use client';
 
 import React from 'react';
+import { Sparkles, ArrowRight, Calendar, Volume2, VolumeX, ShieldCheck } from 'lucide-react';
 import { useSoundState } from '@/state/useSoundState';
-import { useDesktopState, DESKTOP_SHORTCUTS } from '@/state/useDesktopState';
+import { useDesktopState } from '@/state/useDesktopState';
 import { useAppointmentState } from '@/state/useAppointmentState';
 import { useCopilotState } from '@/state/useCopilotState';
 
 import { DesktopBackgroundCanvas } from './DesktopBackgroundCanvas';
-import { DesktopIconsGrid } from './DesktopIconsGrid';
-import { DesktopHeroWallpaperWidget } from './DesktopHeroWallpaperWidget';
-import { MobilePagerContainer } from './MobilePagerContainer';
-import { ContextMenuModal } from './ContextMenuModal';
-import { StartMenuModal } from './StartMenuModal';
-import { TaskbarFooter } from './TaskbarFooter';
+import { FoldersContainer } from '@/components/folders/FoldersContainer';
 
 import { ServicesApp } from '@/components/apps/ServicesApp/ServicesApp';
 import { AboutApp } from '@/components/apps/AboutApp/AboutApp';
@@ -27,22 +23,11 @@ export function DesktopContainer() {
 
   const {
     windows,
-    selectedIconId,
-    setSelectedIconId,
-    isStartMenuOpen,
-    contextMenu,
-    currentTime,
-    currentDate,
     openWindow,
     closeWindow,
     minimizeWindow,
     toggleMaximize,
-    toggleWindow,
-    bringToFront,
-    toggleStartMenu,
-    openContextMenu,
-    closeContextMenu,
-    deselectAll
+    bringToFront
   } = useDesktopState(playBeep);
 
   const appointmentState = useAppointmentState(playBeep);
@@ -59,53 +44,100 @@ export function DesktopContainer() {
   };
 
   return (
-    <div
-      className="bg-slate-100 text-slate-800 font-sans overflow-hidden h-screen w-screen relative select-none"
-      onContextMenu={openContextMenu}
-    >
+    <div className="min-h-screen w-full bg-slate-50 text-slate-900 font-sans relative overflow-x-hidden selection:bg-blue-600 selection:text-white">
       {/* Dynamic Animated Gradient Wallpaper Canvas */}
       <DesktopBackgroundCanvas />
 
-      {/* Main Workspace Region */}
-      <div className="w-full h-[calc(100vh-48px)] overflow-hidden relative z-10">
-        {/* Desktop Main View (DESKTOP MODE: md:flex) */}
-        <main
-          id="desktopScreen"
-          className="hidden md:flex relative z-10 w-full h-full p-6 overflow-hidden items-start justify-between gap-6"
-          onClick={deselectAll}
-        >
-          {/* Left Side: Desktop Grid Shortcuts */}
-          <section className="z-10" aria-label="Desktop Shortcuts">
-            <DesktopIconsGrid
-              shortcuts={DESKTOP_SHORTCUTS}
-              selectedIconId={selectedIconId}
-              onSelectIcon={setSelectedIconId}
-              onOpenWindow={openWindow}
-            />
-          </section>
-
-          {/* Right Side: Wallpaper Hero Content */}
-          <section
-            className="flex-1 flex justify-end w-full max-h-full overflow-y-auto pr-1 z-10 select-text"
-            onClick={e => e.stopPropagation()}
-            aria-label="Overview Information"
-          >
-            <DesktopHeroWallpaperWidget onNavigate={openWindow} />
-          </section>
-        </main>
-
-        {/* Mobile 2-Page Horizontal Slider App Drawer View (MOBILE MODE: md:hidden) */}
-        <main className="block md:hidden relative z-10 w-full h-full">
-          <MobilePagerContainer
-            shortcuts={DESKTOP_SHORTCUTS}
-            selectedIconId={selectedIconId}
-            onSelectIcon={setSelectedIconId}
-            onOpenWindow={openWindow}
+      {/* Top Navbar Header */}
+      <header className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-5 flex items-center justify-between relative z-20">
+        {/* Logo Mark */}
+        <div className="flex items-center space-x-3">
+          <img 
+            src="/logos/Logo-removebg-preview.png" 
+            alt="Oliots Digital Logo" 
+            className="h-10 sm:h-12 w-auto object-contain"
           />
-        </main>
-      </div>
+        </div>
 
-      {/* App Windows */}
+        {/* Top Navbar Actions */}
+        <div className="flex items-center space-x-3">
+
+          {/* Sound FX Toggle */}
+          <button
+            onClick={toggleAudio}
+            className="p-2.5 rounded-xl bg-white/80 hover:bg-white border border-slate-200 text-slate-600 hover:text-blue-600 transition-all shadow-xs cursor-pointer"
+            title={audioEnabled ? 'Audio Effects On' : 'Audio Effects Muted'}
+            aria-label="Toggle Sound Effects"
+          >
+            {audioEnabled ? <Volume2 className="w-4 h-4 text-blue-600" /> : <VolumeX className="w-4 h-4 text-slate-400" />}
+          </button>
+
+          {/* Contact Button */}
+          <button
+            onClick={() => openWindow('contact-app')}
+            className="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm transition-all shadow-sm cursor-pointer"
+          >
+            Contact Studio
+          </button>
+        </div>
+      </header>
+
+      {/* Main Hero Container View */}
+      <main className="w-full max-w-7xl mx-auto px-4 sm:px-8 py-6 sm:py-12 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* LEFT SIDE: Hero Title, Description & 2 Action Buttons */}
+          <section className="lg:col-span-6 flex flex-col justify-center space-y-6">
+
+
+            {/* Hero Main Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.12]">
+             Transform Digitally{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500">
+                Grow Exponentially.
+              </span>
+            </h1>
+
+            {/* Hero Description */}
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-xl">
+            Your one stop destination for all Digital Transformation
+            </p>
+
+            {/* 2 Buttons Below Hero Content */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2">
+              {/* Button 1: Primary Action */}
+              <button
+                id="btn-explore-capabilities"
+                onClick={() => openWindow('services-app')}
+                className="px-7 py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 active:scale-98 text-white font-bold text-sm sm:text-base flex items-center justify-center space-x-2.5 shadow-lg shadow-blue-500/25 hover:shadow-xl hover:shadow-blue-500/35 transition-all duration-200 cursor-pointer group"
+              >
+                <span>Explore Capabilities</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+
+              {/* Button 2: Secondary Action */}
+              <button
+                id="btn-schedule-consultation"
+                onClick={() => openWindow('appointment-app')}
+                className="px-7 py-4 rounded-2xl bg-white/90 hover:bg-white active:scale-98 backdrop-blur-md border border-slate-200 text-slate-800 font-bold text-sm sm:text-base flex items-center justify-center space-x-2.5 shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
+              >
+                <Calendar className="w-5 h-5 text-blue-600" />
+                <span>Schedule Consultation</span>
+              </button>
+            </div>
+
+
+          </section>
+
+          {/* RIGHT SIDE: Folders Container Card */}
+          <section className="lg:col-span-6">
+            <FoldersContainer onOpenFolder={openWindow} />
+          </section>
+
+        </div>
+      </main>
+
+      {/* App Window Modals */}
       <ServicesApp
         windowState={windows['services-app']}
         onMinimize={() => minimizeWindow('services-app')}
@@ -167,32 +199,6 @@ export function DesktopContainer() {
         onMaximize={() => toggleMaximize('recycle-app')}
         onClose={() => closeWindow('recycle-app')}
         onFocus={() => bringToFront('recycle-app')}
-      />
-
-      {/* Context Menu Modal */}
-      <ContextMenuModal
-        isOpen={contextMenu.isOpen}
-        x={contextMenu.x}
-        y={contextMenu.y}
-        onClose={closeContextMenu}
-        onOpenWindow={openWindow}
-      />
-
-      {/* Start Menu Modal */}
-      <StartMenuModal
-        isOpen={isStartMenuOpen}
-        onToggleStartMenu={toggleStartMenu}
-        onOpenWindow={openWindow}
-      />
-
-      {/* Taskbar Footer */}
-      <TaskbarFooter
-        audioEnabled={audioEnabled}
-        onToggleAudio={toggleAudio}
-        currentTime={currentTime}
-        currentDate={currentDate}
-        onToggleStartMenu={toggleStartMenu}
-        onToggleWindow={toggleWindow}
       />
     </div>
   );
